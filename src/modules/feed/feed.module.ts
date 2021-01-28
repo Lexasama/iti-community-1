@@ -29,7 +29,9 @@ import { FeedSocketService } from './services/feed.socket.service';
   }, {
       provide: PostQueries,
       useClass: LocalPostQueries
-    }],
+    },
+    FeedSocketService
+  ],
   imports: [
     CommonModule,
     UserModule,
