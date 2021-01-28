@@ -29,16 +29,25 @@ export class UserWidgetComponent implements OnInit {
     private userService: UserService,
     private store: UserStore
   ) {
-    this.user$ = store.user$;
-    this.photoUrl$ = store.get(s => s.user && s.user.photoUrl ? s.user.photoUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg");
+    this.user$ = store.user$;    
+    
+    this.photoUrl$ = this.store.get(s => s.user && s.user.photoUrl ? s.user.photoUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg");
     this.hasUnread$ = notificationStore.hasUnread$;
   }
 
+
+
+
   ngOnInit(): void {
+    
   }
 
   fireToggleNotificaions() {
       this.toggleNotifications.emit();
+  }
+
+  refreshImage() {   
+    this.photoUrl$ = this.store.get(s => s.user && s.user.photoUrl ? s.user.photoUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg");
   }
 
   logout() {
@@ -47,7 +56,8 @@ export class UserWidgetComponent implements OnInit {
       nzContent: "Êtes-vous sûr(e) de vouloir déconnecter votre session ?",
       nzOkText: "Déconnexion",
       nzOnOk: () => {
-        // TODO logout puis rediriger vers "/splash/login"
+        window.localStorage.clear();
+        this.router.navigate(['/splash/login']);
       }
     });
   }

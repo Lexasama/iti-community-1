@@ -22,6 +22,7 @@ export class UserService {
     username?: string,
     photo?: File
   }): Promise<void> {
+    
     const usr = await this.commands.update(user);
     this.store.mutate(s => {
       return {
@@ -30,7 +31,7 @@ export class UserService {
     });
   }
 
-  async fetchInfo(): Promise<void> {
+  async fetchInfo(): Promise<User> {
     const user = await this.queries.getUserInfo();
     this.store.mutate(s => {
       return {
@@ -38,6 +39,9 @@ export class UserService {
         user
       };
     })
+    
+    return user;
+
   }
 
   search(token: string): Promise<User[]> {

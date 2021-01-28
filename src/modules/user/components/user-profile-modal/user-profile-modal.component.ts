@@ -1,5 +1,5 @@
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { User } from '../../user.model';
@@ -8,6 +8,7 @@ export class UserProfileForm {
   id: string;
   username: string;
   photoUrl?: string;
+  photo?: File
   _file?: File;
   user: User;
 
@@ -54,6 +55,9 @@ export class UserProfileModalComponent implements OnInit {
   @Input()
   user: User;
 
+  @Output()
+  refresh: EventEmitter<any> = new EventEmitter();;
+
   @ViewChild("f")
   form: NgForm;
   supportedTypes = "";
@@ -74,12 +78,15 @@ export class UserProfileModalComponent implements OnInit {
 
   async onOk() {
     // TODO vérifier si le formulaire est valide
-
-    if (this.model.hasChanged()) {
-      // TODO mettre à jour l'utilisateur via le service
+    
+    if(this.form.valid){
+      if (this.model.hasChanged()) {
+        this.model.photo = this.model.file;
+        await this.userService.update(this.model)
+        this.refresh.emit()
+      }
+      this.close();
     }
-
-    this.close();
   }
 
   onFileUpload = (file: File) => {
