@@ -1,0 +1,22 @@
+<div class="appNotifications" *ngIf="isOpened$">
+    <h3>Notifications</h3>
+    <div *ngFor="let notif of notifications$ | async as  notifications">
+        <div [ngStyle]="!notif.viewedAt ? {'background-color': '#a0e39a'} : {}" >
+            <div *ngIf="notif.subject === 'new_user'">
+                <img class="notifImageSideBar" [src]="notif.payload.user.photoUrl ? notif.payload.user.photoUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg'" alt="">
+                <h5>{{notif.payload.user.username}} has joined the chat ! </h5>
+
+            </div>
+            <div *ngIf="notif.subject === 'new_post'">
+                <img class="notifImageSideBar" [src]="notif.payload.user.photoUrl ? notif.payload.user.photoUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg'" alt="">
+                <h5>{{notif.payload.user.username}} has posted something new ! </h5>
+
+            </div>
+            <div *ngIf="notif.subject === 'room_added'">
+                <h5>The room {{notif.payload.room.name}} has been created ! </h5>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+</div>

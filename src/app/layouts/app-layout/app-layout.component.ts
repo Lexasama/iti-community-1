@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AppNotificationsComponent } from 'src/app/app-notifications/app-notifications.component';
 import { AuthenticationStore } from 'src/modules/authentication/authentication.store';
 import { WebsocketConnection } from 'src/modules/common/WebsocketConnection';
+import { UserWidgetComponent } from 'src/modules/user/components/user-widget/user-widget.component';
 
 @Component({
   selector: 'app-app-layout',
@@ -10,6 +12,8 @@ import { WebsocketConnection } from 'src/modules/common/WebsocketConnection';
 })
 export class AppLayoutComponent implements OnInit, OnDestroy {
   sub?: Subscription;
+  @ViewChild(AppNotificationsComponent)
+  notifScreen: AppNotificationsComponent
 
   showDrawer: boolean = false;
   constructor(private socket: WebsocketConnection, private authStore: AuthenticationStore) {
@@ -30,7 +34,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
   }
-  onToggleNotifications() {
-
+  async onToggleNotifications() {
+    await this.notifScreen.toogleNotifications()
   }
 }
