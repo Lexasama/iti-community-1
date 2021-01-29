@@ -5,7 +5,7 @@ export interface PostBase {
     id: string;
     likes: number;
     liked: boolean;
-    roomId: string,
+    roomId: string;
     createdAt: string;
     createdBy: User;
     attachementUrl?: string;

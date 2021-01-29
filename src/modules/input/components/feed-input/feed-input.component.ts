@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren } from '@angular/core';
-import { NzPopoverComponent, NzPopoverDirective } from 'ng-zorro-antd/popover';
-import { UserService } from 'src/modules/user/services/user.service';
-import { User } from 'src/modules/user/user.model';
-import { MessageSentEventPayload } from '../../input.model';
+import {Component, EventEmitter, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
+import {NzPopoverComponent, NzPopoverDirective} from 'ng-zorro-antd/popover';
+import {UserService} from 'src/modules/user/services/user.service';
+import {User} from 'src/modules/user/user.model';
+import {MessageSentEventPayload} from '../../input.model';
 
 @Component({
   selector: 'app-feed-input',
@@ -19,7 +19,7 @@ export class FeedInputComponent {
   /**
    * Hold the input message
    */
-  message: string = "";
+  message: string = '';
 
   users: User[] = [];
 
@@ -30,11 +30,12 @@ export class FeedInputComponent {
 
   currentMention?: RegExpMatchArray;
 
-  supportedTypes = "image/png,image/jpeg,image/gif,image/bmp,image/bmp,video/mpeg,audio/mpeg,audio/x-wav,image/webp";
+  supportedTypes = 'image/png,image/jpeg,image/gif,image/bmp,image/bmp,video/mpeg,audio/mpeg,audio/x-wav,image/webp';
 
   constructor(
     private userService: UserService
-  ) { }
+  ) {
+  }
 
   /**
    * Triggered when the user is selecting a mention in the list.
@@ -42,7 +43,7 @@ export class FeedInputComponent {
    */
   chooseMention(user: User) {
     if (this.currentMention) {
-      this.message = this.message.substr(0, this.currentMention.index! + 1) + user.username + this.message.substr(this.currentMention.index! + this.currentMention[1].length + 1) + " ";
+      this.message = this.message.substr(0, this.currentMention.index! + 1) + user.username + this.message.substr(this.currentMention.index! + this.currentMention[1].length + 1) + ' ';
     }
     this.hideMentionList();
   }
@@ -67,7 +68,7 @@ export class FeedInputComponent {
 
 
   /**
-   * Message change evetn handler
+   * Message change event handler
    * @param message
    */
   onMessageChanged(message: string) {
@@ -82,9 +83,9 @@ export class FeedInputComponent {
   }
 
   /**
-  * Event handler
-  * @param file the file privded by the user
-  */
+   * Event handler
+   * @param file the file privded by the user
+   */
   onFileUpload = (file: File) => {
     this.setFile(file);
     return false;
@@ -96,7 +97,7 @@ export class FeedInputComponent {
    */
   onInputKeyDown(e: KeyboardEvent) {
     // True if "Enter" is pressed without th shift or CTRL key pressed
-    if (e.key.toLowerCase() === "enter" && !e.shiftKey && !e.ctrlKey) {
+    if (e.key.toLowerCase() === 'enter' && !e.shiftKey && !e.ctrlKey) {
       e.stopImmediatePropagation();
       e.preventDefault();
       e.stopPropagation();
@@ -110,7 +111,7 @@ export class FeedInputComponent {
    * @param e
    */
   onInputKeyUp(e: KeyboardEvent) {
-
+    //TODO when @ is pressed open mention
   }
 
   async searchMentionedUsers(search: string) {
@@ -128,9 +129,10 @@ export class FeedInputComponent {
     if (!this.message && !this.file) {
       return;
     }
-
     // TODO émettre  l'évènement "messageSent" via la méthode fireMessageSent
+    this.fireMessageSent();
     // TODO vider la zone de saise avec la méthode clear
+    this.clear();
   }
 
   /**
@@ -146,13 +148,14 @@ export class FeedInputComponent {
    */
   fireMessageSent() {
     // TODO émettre l'évènement "messageSent"
+    this.messageSent.emit({date: new Date(), message: this.message, file: this.file!!});
   }
 
   /**
    * Clear the message to reset the input
    */
   clear() {
-    this.message = "";
+    this.message = '';
     this.setFile(null);
     this.inputPopover.hide();
   }

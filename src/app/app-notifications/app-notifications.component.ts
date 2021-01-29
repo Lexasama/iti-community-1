@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { NotificationStore } from 'src/modules/notification/notification.store';
 import { NotificationService } from 'src/modules/notification/services/notification.service';
 import { User } from 'src/modules/user/user.model';
-import * as notifs from "../../modules/notification/notification.model";
 import * as ng from 'ng-zorro-antd/notification';
 import { NotificationSocketService } from 'src/modules/notification/services/notification.socket.service';
 import { WebNotificationServiceService as WebNotificationService } from '../web-notification-service.service';
@@ -19,8 +18,8 @@ export class AppNotificationsComponent implements OnInit {
   public isOpened$ = false
   private isVisible = true
   private notifications$: Observable<any[]>;
-  constructor(private notificationStore: NotificationStore, private notificationService: NotificationService, private notif: ng.NzNotificationService, 
-    notifSocket : NotificationSocketService, webNotif: WebNotificationService) { 
+  constructor(private notificationStore: NotificationStore, private notificationService: NotificationService, private notif: ng.NzNotificationService,
+    notifSocket : NotificationSocketService, webNotif: WebNotificationService) {
 
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === 'visible') {
@@ -29,15 +28,15 @@ export class AppNotificationsComponent implements OnInit {
           this.isVisible = false;
         }
       });
-      
+
     this.notifications$ = this.notificationStore.get(n => n.notifications)
     notifSocket.onNewNotification(n => {
       this.notifications$ = this.notificationStore.get(n => n.notifications);
       if(n.subject === 'new_user') {
         this.notif.blank(n.payload.user.username, " has joined")
-        
+
         if(!this.isVisible) new Notification(n.payload.user.username + " has joined.")
-        
+
       } else if (n.subject === 'post_liked'){
         this.notif.blank(n.payload.user.username, "Posted something new")
         if(!this.isVisible) new Notification(n.payload.user.username + " posted something new.")
