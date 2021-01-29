@@ -26,7 +26,7 @@ import { NotificationModule } from 'src/modules/notification/notification.module
 import { WebsocketConnection } from 'src/modules/common/WebsocketConnection';
 import { SocketIoWebsocketConnection } from 'src/modules/common/SocketIoWebsocketConnection';
 import { WebSocketTopic } from 'src/modules/common/WebSocketTopic';
-import { AppNotificationsComponent } from './app-notifications/app-notifications.component';
+import { AppNotificationsComponent } from './layouts/app-notifications/app-notifications.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { DateFormatterPipe } from './date-formatter.pipe';
 const ws = new SocketIoWebsocketConnection();

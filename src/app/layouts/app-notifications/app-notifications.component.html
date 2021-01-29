@@ -9,7 +9,7 @@
             </div>
             <div *ngIf="notif.subject === 'new_post'">
                 <img class="notifImageSideBar" [src]="notif.payload.user.photoUrl ? notif.payload.user.photoUrl : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/434px-Unknown_person.jpg'" alt="">
-                <h5>{{notif.payload.user.username}} has posted something new ! </h5>
+                <h5>{{notif.payload.user.username}} has liked a post ! </h5>
                 <h6>{{notif.timestamp | dateFormatter: 1}}</h6>
             </div>
             <div *ngIf="notif.subject === 'room_added'">
