@@ -3,14 +3,10 @@ import { Observable } from 'rxjs';
 import { NotificationStore } from 'src/modules/notification/notification.store';
 import { NotificationService } from 'src/modules/notification/services/notification.service';
 import { User } from 'src/modules/user/user.model';
-import * as notifs from "../../../modules/notification/notification.model";
 import * as ng from 'ng-zorro-antd/notification';
 import { NotificationSocketService } from 'src/modules/notification/services/notification.socket.service';
 import { WebNotificationServiceService as WebNotificationService } from '../../web-notification-service.service';
 import { Router } from '@angular/router';
-import { PostQueries } from 'src/modules/feed/services/post.queries';
-import { PostService } from 'src/modules/feed/services/post.service';
-import { RoomStore } from 'src/modules/room/room.store';
 import { RoomQueries } from 'src/modules/room/services/room.queries';
 
 @Component({
@@ -45,12 +41,6 @@ export class AppNotificationsComponent implements OnInit {
         
       } else if (n.subject === 'post_liked'){
         this.notif.blank(n.payload.user.username, "Posted something new")
-        if(!this.isVisible) {
-          let notifWeb = new Notification(n.payload.user.username + " liked your post.");
-          
-          
-        }
-
       } else if (n.subject === 'room_added') {
         this.notif.blank(n.payload.room.name, "Has been created")
         if(!this.isVisible) {
