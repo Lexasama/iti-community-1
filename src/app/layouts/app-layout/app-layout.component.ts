@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AppNotificationsComponent } from 'src/app/app-notifications/app-notifications.component';
+import { AppNotificationsComponent } from 'src/app/layouts/app-notifications/app-notifications.component';
 import { AuthenticationStore } from 'src/modules/authentication/authentication.store';
 import { WebsocketConnection } from 'src/modules/common/WebsocketConnection';
 import { UserWidgetComponent } from 'src/modules/user/components/user-widget/user-widget.component';

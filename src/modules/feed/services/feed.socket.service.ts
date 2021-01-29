@@ -21,4 +21,6 @@ export class FeedSocketService {
     this.socketToic.subscribe(`room_${roomId}_posts`, cb);
   }
 
+  
+
 }

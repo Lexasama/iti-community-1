@@ -26,6 +26,9 @@ export class RoomMenuComponent implements OnInit {
   constructor(private feedStore: FeedStore, private queries: RoomQueries, private roomSocketService: RoomSocketService, private router: Router) {
     this.roomId$ = feedStore.roomId$;
     this.rooms = [];
+    roomSocketService.onNewRoom(r => {
+      this.rooms.push(r);
+    })
   }
 
   async ngOnInit() {
@@ -35,8 +38,8 @@ export class RoomMenuComponent implements OnInit {
       this.goToRoom(this.rooms.find(r => r.id === lastRoomId));
     } else {
       this.goToRoom(this.rooms[0]);
-
     }
+
   }
 
   goToLastRoom() {
