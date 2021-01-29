@@ -1,6 +1,7 @@
 import { AsyncPipe, NgClass, NgForOf, NgIf, NgStyle } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { NzNotificationService } from "ng-zorro-antd/notification";
+import { DateFormatterPipe } from "../date-formatter.pipe";
 import { AppNotificationsComponent } from "./app-notifications.component";
 
 @NgModule({
@@ -11,7 +12,8 @@ import { AppNotificationsComponent } from "./app-notifications.component";
         AsyncPipe,
         NgStyle,
         NzNotificationService,
-        NgClass
+        NgClass,
+        DateFormatterPipe
     ],
     imports: [
       

@@ -28,6 +28,7 @@ import { SocketIoWebsocketConnection } from 'src/modules/common/SocketIoWebsocke
 import { WebSocketTopic } from 'src/modules/common/WebSocketTopic';
 import { AppNotificationsComponent } from './app-notifications/app-notifications.component';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { DateFormatterPipe } from './date-formatter.pipe';
 const ws = new SocketIoWebsocketConnection();
 
 registerLocaleData(fr);
@@ -40,7 +41,8 @@ registerLocaleData(fr);
     SplashScreenLayoutComponent,
     AppLayoutComponent,
     RegistrationPageComponent,
-    RoomPageComponent
+    RoomPageComponent,
+    DateFormatterPipe
   ],
   imports: [
     BrowserModule,
